@@ -6,27 +6,23 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-/**
- * Class that represents a bank
- * 
- * @author Santiago Forero Yate
- * @author Wilson Rafael Morales
- * @author Cesar Manuel Vasquez
- */
-@Entity(name = "banks")
+@Entity(name = "users")
 @Data
-public class Bank {
-
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String name;
+    private Long  id;
+    private String username;
+    private  String password;
 
-    public  Bank() {}
+    public User(){
 
-    public Bank(Long id, String name) {
+    }
+
+    public User(Long id, String username, String password) {
         this.id = id;
-        this.name = name;
+        this.username = username;
+        this.password = password;
     }
 
     

@@ -7,24 +7,25 @@ import jakarta.persistence.Id;
 import lombok.Data;
 
 @Entity(name = "accounts")
+@Data
 public class Account {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String  nir;
     private String accountNumber;
     private int  balance;
-    private Long providerId;
+    private Long bankId;
 
     public Account(){}
 
-    public Account(Long id, String nir, String accountNumber, int balance, Long providerId) {
+    public Account(Long id, String nir, String accountNumber, int balance, Long bankId) {
         this.id = id;
         this.nir = nir;
         this.accountNumber = accountNumber;
         this.balance = balance;
-        this.providerId = providerId;
+        this.bankId = bankId;
     }
 
 

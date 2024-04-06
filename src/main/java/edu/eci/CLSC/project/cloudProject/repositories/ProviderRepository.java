@@ -8,4 +8,5 @@ import edu.eci.CLSC.project.cloudProject.models.Provider;
 @Repository
 public interface ProviderRepository extends JpaRepository<Provider, Long> {
     
+    public Provider findByName(String name);
 }
