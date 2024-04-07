@@ -20,16 +20,21 @@ public class UserService {
         return this.userRepository.findByUsername(username).orElseThrow(() -> new UserException(MessageErros.NOT_FOUND_USER.getMessageError()));
     }
 
+    public void addUser(User user){
+        user.setPassword(hashPwd(user.getPassword()));
+        this.userRepository.save(user);
+    }
 
 
-    private String hashPwd(String chain){
+
+    public String hashPwd(String chain){
         MessageDigest md;
         try {
             md = MessageDigest.getInstance("SHA-256");
             byte[] hashBytes = md.digest(chain.getBytes());
             return Base64.getEncoder().encodeToString(hashBytes);
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            System.out.println("problems hashing");
         }
 
         return null;
