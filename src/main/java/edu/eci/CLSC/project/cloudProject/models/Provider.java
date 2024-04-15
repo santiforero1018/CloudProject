@@ -1,9 +1,13 @@
 package edu.eci.CLSC.project.cloudProject.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 
@@ -25,19 +29,24 @@ public class Provider {
     private String nit;
     private String direction;
     private String phone;
-    private String accountId;
+
+    @OneToOne
+    @JoinColumn(name = "account_id")
+    @JsonManagedReference
+    private Account account;
 
     
     public Provider() {
     }
 
 
-    public Provider(Long id, String name, String nit,String direction, String phone, String accountId) {
+    public Provider(Long id, String name, String nit,String direction, String phone, Account account) {
         this.id = id;
         this.name = name;
         this.nit = nit;
         this.direction = direction;
         this.phone = phone;
+        this.account = account;
     }
 
     

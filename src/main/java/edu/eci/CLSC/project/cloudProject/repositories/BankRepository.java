@@ -10,4 +10,6 @@ import edu.eci.CLSC.project.cloudProject.models.Bank;
 @Repository
 public interface BankRepository extends JpaRepository<Bank, Long> {
     public Optional<Bank> findByName(String name);
+
+    public boolean existsByName(String name);
 }

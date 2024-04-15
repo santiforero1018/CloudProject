@@ -1,27 +1,15 @@
 package edu.eci.CLSC.project.cloudProject.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import edu.eci.CLSC.project.cloudProject.models.*;
-import edu.eci.CLSC.project.cloudProject.repositories.ProviderRepository;
 
-@Service
-public class ProviderService {
-    
-    @Autowired
-    private ProviderRepository providerRepository;
+import edu.eci.CLSC.project.cloudProject.Exception.ProviderException;
+import edu.eci.CLSC.project.cloudProject.models.Provider;
 
-    public Provider addProvide(Provider pr){
-        return this.providerRepository.save(pr);
-    }
+public interface ProviderService {
+    public Provider addProvide(Provider pr);
 
-    public Provider updateProvider(Provider pr){
-        if(this.providerRepository.existsById(pr.getId())) return this.providerRepository.save(pr);
+    public Provider updateProvider(String prName, Provider pr) throws ProviderException;
 
-        return null;
-    }
+    public Provider getProvider(String name) throws ProviderException;
 
-    public Provider getProvider(String name){
-        return this.providerRepository.findByName(name);
-    }
+    public Provider getProviderByNIT(String nit) throws ProviderException;
 }

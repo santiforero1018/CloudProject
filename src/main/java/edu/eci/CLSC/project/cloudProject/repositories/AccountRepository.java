@@ -10,5 +10,6 @@ import edu.eci.CLSC.project.cloudProject.models.Account;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, String> {
     public Optional<Account> findByAccountNumber(String accountNumber);
+    public boolean existsByAccountNumber(String accountNumber);
     public void deleteByAccountNumber(String  accountNumber);
 }
