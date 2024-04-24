@@ -9,4 +9,6 @@ public interface UserService {
 
     public void addUser(User user);
 
+    public boolean validateUser(String username, String password) throws UserException;
+
 }

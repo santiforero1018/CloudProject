@@ -1,4 +1,10 @@
 package edu.eci.CLSC.project.cloudProject;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -7,9 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.eci.CLSC.project.cloudProject.models.Account;
 import edu.eci.CLSC.project.cloudProject.models.Bank;
 import edu.eci.CLSC.project.cloudProject.models.Provider;
+import edu.eci.CLSC.project.cloudProject.models.User;
 import edu.eci.CLSC.project.cloudProject.repositories.AccountRepository;
 import edu.eci.CLSC.project.cloudProject.repositories.BankRepository;
 import edu.eci.CLSC.project.cloudProject.repositories.ProviderRepository;
+import edu.eci.CLSC.project.cloudProject.repositories.UserRepository;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -22,6 +30,9 @@ public class DataLoader implements CommandLineRunner {
 
     @Autowired
     private ProviderRepository providerRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     @Transactional
@@ -55,6 +66,27 @@ public class DataLoader implements CommandLineRunner {
         if(!providerRepository.existsByNit(provider.getNit())){
             providerRepository.save(provider);
         }
+
+        User proofUser = new User();
+        proofUser.setUsername("admin");
+        proofUser.setPassword(hashPwd("admin"));
+        if(!this.userRepository.existsByUsername(proofUser.getUsername())){
+            this.userRepository.save(proofUser);
+        }
         
+    }
+
+    public String hashPwd(String chain) {
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = md.digest(chain.getBytes());
+            return Base64.getEncoder().encodeToString(hashBytes);
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("problems hashing");
+        }
+
+        return null;
+
     }
 }

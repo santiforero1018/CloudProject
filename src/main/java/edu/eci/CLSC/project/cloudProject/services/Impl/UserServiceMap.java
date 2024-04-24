@@ -21,18 +21,23 @@ public class UserServiceMap implements UserService {
 
     @Override
     public User getUser(String username) throws UserException {
-        return this.userRepository.findByUsername(username).orElseThrow(() -> new UserException(MessageErros.NOT_FOUND_USER.getMessageError()));
+        return this.userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserException(MessageErros.NOT_FOUND_USER.getMessageError()));
     }
 
     @Override
-    public void addUser(User user){
+    public void addUser(User user) {
         user.setPassword(hashPwd(user.getPassword()));
         this.userRepository.save(user);
     }
 
+    @Override
+    public boolean validateUser(String username, String password) throws UserException {
+        User user = this.getUser(username);
+        return user.getPassword().equals(hashPwd(password));
+    }
 
-
-    public String hashPwd(String chain){
+    public String hashPwd(String chain) {
         MessageDigest md;
         try {
             md = MessageDigest.getInstance("SHA-256");
@@ -43,6 +48,6 @@ public class UserServiceMap implements UserService {
         }
 
         return null;
-       
+
     }
 }

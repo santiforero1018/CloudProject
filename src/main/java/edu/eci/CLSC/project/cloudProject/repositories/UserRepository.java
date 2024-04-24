@@ -10,4 +10,6 @@ import edu.eci.CLSC.project.cloudProject.models.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     public Optional<User> findByUsername(String userName);
+
+    public boolean existsByUsername(String username);
 }
