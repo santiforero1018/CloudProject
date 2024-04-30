@@ -16,7 +16,7 @@ import edu.eci.CLSC.project.cloudProject.services.AccountService;
 import edu.eci.CLSC.project.cloudProject.services.BankService;
 import edu.eci.CLSC.project.cloudProject.services.ProviderService;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://red-sand-074a8980f.5.azurestaticapps.net"})
 @RestController
 @RequestMapping("/v1/providers")
 public class ProviderController {
