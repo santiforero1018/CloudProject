@@ -21,9 +21,6 @@ jobs:
         with:
           java-version: '21'
 
-      - name: Change to 'back' directory
-        run: cd back
-
       - name: Build with Maven
         run: mvn clean install
 
