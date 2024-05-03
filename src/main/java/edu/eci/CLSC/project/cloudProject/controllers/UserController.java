@@ -10,7 +10,7 @@ import edu.eci.CLSC.project.cloudProject.Exception.UserException;
 import edu.eci.CLSC.project.cloudProject.services.UserService;
 
 
-@CrossOrigin(origins = {"http://localhost:3000", "https://red-sand-074a8980f.5.azurestaticapps.net"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://mango-cliff-0bb80e60f.5.azurestaticapps.net"})
 
 @RestController
 @RequestMapping("/v1/users")
